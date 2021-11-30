@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path'); // allows access to views folder from any other folder
 const mongoose = require('mongoose');
+const ejsMate= require('ejs-mate');
 const methodOverride = require('method-override'); // allows to override request type
 const Campground = require('./models/campground'); // include campground schema
 
@@ -14,6 +15,7 @@ db.once("open", () => {
 
 const app = express();
 
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views')); // set views path
 
