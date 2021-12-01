@@ -7,6 +7,8 @@
         <form
             action="/campgrounds/<%= campground._id %>?_method=PUT"
             method="POST"
+            class="validated-form required"
+            novalidate
         >
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
@@ -17,7 +19,11 @@
                     id="title"
                     name="campground[title] "
                     value="<%= campground.title %>"
+                    required
                 />
+                <div class="invalid-feedback">
+                    Campground title is required.
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="price-label">Price</label>
@@ -31,7 +37,11 @@
                         value="<%= campground.price %>"
                         aria-label="price"
                         aria-describedby="price-label"
+                        required
                     />
+                    <div class="invalid-feedback">
+                        Campground price is required.
+                    </div>
                 </div>
             </div>
             <div class="mb-3">
@@ -42,7 +52,11 @@
                     id="location"
                     name="campground[location]"
                     value="<%= campground.location %>"
+                    required
                 />
+                <div class="invalid-feedback">
+                    Campground location is required.
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="image">Image URL</label>
@@ -52,7 +66,11 @@
                     id="location"
                     name="campground[image]"
                     value="<%= campground.image %>"
+                    required
                 />
+                <div class="invalid-feedback">
+                    Campground image is required.
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
@@ -62,9 +80,13 @@
                     type="text"
                     id="description"
                     name="campground[description]"
+                    required
                 >
-<%= campground.description %></textarea
+                <%= campground.description %></textarea
                 >
+                <div class="invalid-feedback">
+                    Campground description is required.
+                </div>
             </div>
             <div class="mb-3">
                 <button class="btn btn-info">Update Campground</button>
