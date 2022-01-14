@@ -1,4 +1,4 @@
-// Example starter JavaScript for disabling form submissions if there are invalid fields
+// add validated-form class to forms to disable submissions if there are invalid fields
 (function () {
     "use strict"
 
