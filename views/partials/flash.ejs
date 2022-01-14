@@ -9,7 +9,10 @@
         aria-label="Close"
     ></button>
 </div>
-<% } %> <% if (error && error.length) { %>
+<% } %>
+
+<!-- prettier-ignore -->
+<% if (error && error.length) { %>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <%= error %>
     <button
