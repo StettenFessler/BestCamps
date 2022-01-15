@@ -9,6 +9,11 @@ const CampgroundSchema = new Schema({
     image: String,
     description: String,
     location: String,
+    // reference to the user who created the campground
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     // reviews stores object IDs from the review model 
     // one to many relationship between a campground and its reviews
     reviews: [
