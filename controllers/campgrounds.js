@@ -1,0 +1,64 @@
+const Campground = require('../models/campground'); 
+
+module.exports.index = async (req, res) => {
+    // find all campgrounds in campground collection
+    const campgrounds = await Campground.find({});
+    res.render('campgrounds/index', { campgrounds });
+}
+
+module.exports.renderNewForm = (req, res) => {
+    res.render('campgrounds/new');
+}
+
+module.exports.createCampground = async (req, res, next) => {
+    const campground = new Campground(req.body.campground);
+    // req.user automatically added in by passport
+    campground.author = req.user._id;
+    await campground.save();
+    req.flash('success', 'Successfully made a new campground!');
+    res.redirect(`/campgrounds/${campground._id}`);
+}
+
+module.exports.showCampground = async (req, res) => {
+    // populate replaces the ids in the reviews array on the campground model with the actual review documents
+    const campground = await Campground.findById(req.params.id).populate({
+        // populate reviews onto the campground
+        path: 'reviews',
+        // then populate each review author onto each review
+        populate: { 
+            path: 'author'
+        }
+        // then populate each campground author onto each campground
+    }).populate('author');
+    if(!campground) {
+        req.flash('error', 'Cannot find that campground!')
+        return res.redirect('/campgrounds');
+    }
+    res.render('campgrounds/show', { campground });
+}
+
+module.exports.renderEditForm = async (req, res) => {   
+    const { id } = req.params;
+    const campground = await Campground.findById(id);
+    if (!campground) {
+        req.flash('error', 'Cannot find that campground!');
+        return res.redirect('/campgrounds');
+    }
+    res.render('campgrounds/edit', { campground });
+}
+
+module.exports.updateCampground = async (req, res) => {
+    const { id } = req.params;
+    // the spread operator (...) clones the old campground to a new one, 
+    // while only overwriting values that have been edited
+    const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground }) //  (id to search by, what to use to update)
+    req.flash('success', 'Successfully updated campground!');
+    res.redirect(`/campgrounds/${campground._id}`);
+}
+
+module.exports.destroyCampground = async (req, res) => {
+    const { id } = req.params;
+    await Campground.findByIdAndDelete(id);
+    req.flash('success', 'Successfully deleted campground!');
+    res.redirect('/campgrounds');
+}
