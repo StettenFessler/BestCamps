@@ -26,9 +26,30 @@ const seedDB = async () => {
             author: '61e0c906aebcde2cba312e72',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
-            image: 'https://source.unsplash.com/collection/483251',
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo suscipit numquam molestiae dicta earum quaerat magni tempore beatae laborum placeat nulla consequatur, neque veritatis consequuntur officiis ad assumenda vitae quas?',
-            price
+            price,
+            images: [
+                {
+                    url: 'https://res.cloudinary.com/dqzsm4akj/image/upload/v1642886164/BestCamps/y1ndgd84xg4ipis63vyz.jpg',
+                    filename: 'BestCamps/y1ndgd84xg4ipis63vyz',
+                  },
+                {
+                    url: 'https://res.cloudinary.com/dqzsm4akj/image/upload/v1642886168/BestCamps/htwghok6vfnsualttxhr.jpg',
+                    filename: 'BestCamps/htwghok6vfnsualttxhr',
+                },
+                {
+                    url: 'https://res.cloudinary.com/dqzsm4akj/image/upload/v1642886171/BestCamps/hbkl51g8pjmojg7ljp7v.jpg',
+                    filename: 'BestCamps/hbkl51g8pjmojg7ljp7v',
+                },
+                {
+                    url: 'https://res.cloudinary.com/dqzsm4akj/image/upload/v1642886173/BestCamps/ir8pezvpbsllby9uyxai.jpg',
+                    filename: 'BestCamps/ir8pezvpbsllby9uyxai',
+                },
+                {
+                    url: 'https://res.cloudinary.com/dqzsm4akj/image/upload/v1642886174/BestCamps/oypqzqh6jkhsbykmoxtt.jpg',
+                    filename: 'BestCamps/oypqzqh6jkhsbykmoxtt',
+                }
+            ]
         })
         await camp.save();
     }

@@ -1,94 +1,56 @@
 <% layout('layouts/boilerplate') %>
-<div class="row">
-    <h1 class="text-center">New Campground</h1>
-    <!-- center col with offset by increasing margin left -->
-    <div class="col-6 offset-3">
-        <form
-            action="/campgrounds"
-            method="POST"
-            class="validated-form"
-            novalidate
-        >
-            <div class="mb-3">
-                <label class="form-label" for="title">Title</label>
-                <!-- everything in req.body will be stored under "campground" -->
-                <input
-                    class="form-control"
-                    type="text"
-                    id="title"
-                    name="campground[title]"
-                    placeholder=""
-                    required
-                />
-                <div class="invalid-feedback">
-                    Campground title is required.
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="price-label">Price</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1">$</span>
-                    <input
-                        type="number"
-                        id="price-label"
-                        class="form-control"
-                        name="campground[price]"
-                        placeholder="0.00"
-                        aria-label="price"
-                        aria-describedby="price-label"
-                        required
-                    />
+    <div class="row">
+        <h1 class="text-center">New Campground</h1>
+        <!-- center col with offset by increasing margin left -->
+        <div class="col-6 offset-3">
+            <form action="/campgrounds" method="POST" class="validated-form" enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <!-- everything in req.body will be stored under "campground" -->
+                    <input class="form-control" type="text" id="title" name="campground[title]" placeholder=""
+                        required />
                     <div class="invalid-feedback">
-                        Campground price is required.
+                        Campground title is required.
                     </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="location">Location</label>
-                <input
-                    class="form-control"
-                    type="text"
-                    id="location"
-                    name="campground[location]"
-                    placeholder=""
-                    required
-                />
-                <div class="invalid-feedback">
-                    Campground location is required.
+                <div class="mb-3">
+                    <label class="form-label" for="price-label">Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">$</span>
+                        <input type="number" id="price-label" class="form-control" name="campground[price]"
+                            placeholder="0.00" aria-label="price" aria-describedby="price-label" required />
+                        <div class="invalid-feedback">
+                            Campground price is required.
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="image">Image URL</label>
-                <input
-                    class="form-control"
-                    type="text"
-                    id="image"
-                    name="campground[image]"
-                    required
-                />
-                <div class="invalid-feedback">
-                    Campground image is required.
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="campground[location]" placeholder=""
+                        required />
+                    <div class="invalid-feedback">
+                        Campground location is required.
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="description">Description</label>
-                <textarea
-                    class="form-control"
-                    rows="3"
-                    type="text"
-                    id="description"
-                    name="campground[description]"
-                    placeholder=""
-                    required
-                ></textarea>
-                <div class="invalid-feedback">
-                    Campground description is required.
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" rows="3" type="text" id="description" name="campground[description]"
+                        placeholder="" required></textarea>
+                    <div class="invalid-feedback">
+                        Campground description is required.
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <button class="btn btn-success">Add Campground</button>
-            </div>
-        </form>
-        <a href="/campgrounds">All Campgrounds</a>
+                <div class="mb-3">
+                    <label for="imagesUpload" class="form-label">Upload Image(s)</label>
+                    <input class="form-control" type="file" id="imagesUpload" name="image" required multiple>
+                    <div class="invalid-feedback">
+                        At least one campground image is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-success">Add Campground</button>
+                </div>
+            </form>
+            <a href="/campgrounds">All Campgrounds</a>
+        </div>
     </div>
-</div>

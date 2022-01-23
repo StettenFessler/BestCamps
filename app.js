@@ -1,3 +1,10 @@
+// if not in production, require dotenv module and call the config function 
+if(process.env.NODE_ENV !== 'production') {
+    // takes the variables in the .env file and adds them into process.env in our node app 
+    // these variables are accessible in any project file 
+    require('dotenv').config(); 
+}
+
 const express = require('express');
 const path = require('path'); // allows access to views folder from any other folder
 const mongoose = require('mongoose');

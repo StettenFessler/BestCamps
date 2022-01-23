@@ -1,4 +1,5 @@
 const Campground = require('../models/campground'); 
+const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async (req, res) => {
     // find all campgrounds in campground collection
@@ -12,9 +13,12 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createCampground = async (req, res, next) => {
     const campground = new Campground(req.body.campground);
+    // creates an array of objects containing the url and filename of each image
+    campground.images = req.files.map(f => ({url: f.path, filename: f.filename})); // req.files is an array created by multer containing file objects
     // req.user automatically added in by passport
     campground.author = req.user._id;
     await campground.save();
+    console.log(campground);
     req.flash('success', 'Successfully made a new campground!');
     res.redirect(`/campgrounds/${campground._id}`);
 }
@@ -52,6 +56,19 @@ module.exports.updateCampground = async (req, res) => {
     // the spread operator (...) clones the old campground to a new one, 
     // while only overwriting values that have been edited
     const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground }) //  (id to search by, what to use to update)
+    const imgs = req.files.map(f => ({ url: f.path, filename: f.filename })); // req.files is an array created by multer containing file objects
+    // use push so that existing images aren't overwritten
+    campground.images.push(...imgs);
+    await campground.save();
+    if (req.body.deleteImages) {
+        // delete images from cloudinary
+        for(let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename);
+        }
+        // pull removes elements from an array
+        // in campground images, delete images that have a filename that is in the deleteImages array
+        await campground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages }}}});
+    }
     req.flash('success', 'Successfully updated campground!');
     res.redirect(`/campgrounds/${campground._id}`);
 }

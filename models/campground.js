@@ -2,11 +2,22 @@ const mongoose = require('mongoose');
 const Review = require('./review');
 const Schema = mongoose.Schema;
 
+const ImageSchema = new Schema({
+    url: String,
+    filename: String
+})
+
+// virtuals are not stored in the database
+ImageSchema.virtual('thumbnail').get(function() {
+    // this refers to the particular image
+    return this.url.replace('/upload', '/upload/w_200');
+});
+
 const CampgroundSchema = new Schema({
     title: String,
     price: Number,
     description: String,
-    image: String,
+    images: [ImageSchema], // each campground can have multiple images  
     description: String,
     location: String,
     // reference to the user who created the campground
