@@ -8,10 +8,13 @@ const ImageSchema = new Schema({
 })
 
 // virtuals are not stored in the database
+// they are generated on the fly by the virtual function
 ImageSchema.virtual('thumbnail').get(function() {
     // this refers to the particular image
     return this.url.replace('/upload', '/upload/w_200');
 });
+
+const opts = { toJSON: { virtuals: true }};
 
 const CampgroundSchema = new Schema({
     title: String,
@@ -44,7 +47,15 @@ const CampgroundSchema = new Schema({
             ref: 'Review'
         }
     ]
-})
+}, opts);
+
+// by default, mongoose does not inlude virtuals when you convert a document to JSON
+// creates a properties object in each campground with key popUpMarkup
+CampgroundSchema.virtual('properties.popUpMarkup').get(function() {
+    return `<strong><a href="/campgrounds/${this._id}">${this.title}</a></strong>
+    <p>${this.description.substring(0, 20)}...</p>
+    `;
+});
 
 // this query middleware func runs AFTER something is deleted
 // doc is the campground document that was deleted
