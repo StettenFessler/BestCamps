@@ -28,15 +28,15 @@ const seedDB = async () => {
             title: `${sample(descriptors)} ${sample(places)}`,
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo suscipit numquam molestiae dicta earum quaerat magni tempore beatae laborum placeat nulla consequatur, neque veritatis consequuntur officiis ad assumenda vitae quas?',
             price,
+            geometry: {
+                type: "Point",
+                coordinates: [-113.1331, 47.0202]
+            },
             images: [
                 {
                     url: 'https://res.cloudinary.com/dqzsm4akj/image/upload/v1642886164/BestCamps/y1ndgd84xg4ipis63vyz.jpg',
                     filename: 'BestCamps/y1ndgd84xg4ipis63vyz',
                   },
-                {
-                    url: 'https://res.cloudinary.com/dqzsm4akj/image/upload/v1642886168/BestCamps/htwghok6vfnsualttxhr.jpg',
-                    filename: 'BestCamps/htwghok6vfnsualttxhr',
-                },
                 {
                     url: 'https://res.cloudinary.com/dqzsm4akj/image/upload/v1642886171/BestCamps/hbkl51g8pjmojg7ljp7v.jpg',
                     filename: 'BestCamps/hbkl51g8pjmojg7ljp7v',

@@ -16,10 +16,21 @@ ImageSchema.virtual('thumbnail').get(function() {
 const CampgroundSchema = new Schema({
     title: String,
     price: Number,
+    location: String,
     description: String,
     images: [ImageSchema], // each campground can have multiple images  
     description: String,
-    location: String,
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
     // reference to the user who created the campground
     author: {
         type: Schema.Types.ObjectId,

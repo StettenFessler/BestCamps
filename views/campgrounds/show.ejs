@@ -4,8 +4,6 @@
     <div class="row">
         <!-- card will take up half the row -->
         <div class="col-6">
-
-
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <!-- add a class of "active" to the first image -->
@@ -27,8 +25,6 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                     <% } %>
-
-
             </div>
             <div class="card">
                 <div class="card-body">
@@ -62,6 +58,7 @@
             </div>
         </div>
         <div class="col-6">
+            <div id="map" style="width: 400px; height: 300px"></div>
             <% if (currentUser) { %>
                 <h2>Leave a Review</h2>
                 <!-- novalidate tells the form to not validate with html validations -->
@@ -108,7 +105,16 @@
                                     </form>
                                     <% } %>
                             </div>
+                            ejs
                         </div>
                         <% } %>
         </div>
     </div>
+
+    <script>
+        // token is stored in the backend, so must use ejs to inject it into frontend code
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        // send campground object as a string
+        const campgroundString = '<%-JSON.stringify(campground)%>';
+    </script>
+    <script src="/js/showPageMap.js"></script>
