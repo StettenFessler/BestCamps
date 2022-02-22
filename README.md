@@ -5,7 +5,7 @@
 
 ## About
 
-BestCamps is a full stack web application developed for my final project of The Web Developer Bootcamp by Colt Steele. Users can upload campgrounds, 
+BestCamps is a full stack Node.js web application developed for my final project of The Web Developer Bootcamp by Colt Steele. Users can upload campgrounds, 
 leave reviews on campgrounds, and view campground locations on a cluster map. View BestCamps in action [here](https://calm-badlands-34320.herokuapp.com)!
 
 ## Features
